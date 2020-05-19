@@ -4,6 +4,22 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
   <br />
+  <%= f.label :artist_name %>
+  <%= f.text_field :artist_name %>
+  <br />
+
+  <%= f.text_field :genre_id, list: "genres_autocomplete" %>
+  <datalist id="genres_autocomplete">
+    <% Genre.all.each do |genre| %>
+      <option value="<%= genre.id %>"><%= genre.name %></option>
+    <% end %>
+  </datalist>
+  
+  <%= f.fields_for :notes do |note_form| %>
+    <%= note_form.label :note %>
+    <%= note_form.text_area :content, rows: 5, cols: 50 %>
+    <br/>
+  <% end %>
 
   <%= f.submit %>
 <% end %>
